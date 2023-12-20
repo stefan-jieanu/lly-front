@@ -1,6 +1,6 @@
 import Canvas from "./Canvas"
 import { Scene } from "../../gfx/gfx";
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState, useMemo, useCallback } from "react";
 import Controls from "./Controls";
 
 export default function Editor() {
@@ -10,22 +10,27 @@ export default function Editor() {
 
   useEffect(() => {
     if (canvasRef) {
-      app = new Scene(canvasRef.current, getFromCanvas);
+      app = new Scene(canvasRef.current);
       app.run();
-
-      document.onmousemove();
+      app.hoverInfCallback = getFromCanvas;
     }
 
     return () => { }
   }, [canvasRef])
 
-  const doSomething = () => {
-    app.doSomething();
-  }
-
   const getFromCanvas = (x: number, y: number) => {
     setHoverInfo({ x: x, y: y });
   }
+
+  const doSomething = useCallback(() => {
+    app.doSomething();
+  }, [])
+
+  const handleMouseMovement = useCallback((e: MouseEvent) => {
+    e.preventDefault();
+
+    app.mouseMoveCallback(e);
+  }, [])
 
   return (
     <div className="h-full">
@@ -34,7 +39,7 @@ export default function Editor() {
           <Controls doSomething={doSomething} hoverInfo={hoverInfo} />
         </div>
         <div className=''>
-          <Canvas canvasRef={canvasRef} />
+          <Canvas canvasRef={canvasRef} onMouseMove={handleMouseMovement} />
         </div>
       </div>
     </div>
