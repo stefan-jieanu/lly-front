@@ -1,15 +1,16 @@
 import Canvas from "./Canvas"
 import { Scene } from "../../gfx/gfx";
-import { useRef, useEffect, useState, useMemo, useCallback } from "react";
+import { useRef, useEffect, useState, useCallback } from "react";
 import Controls from "./Controls";
 
 export default function Editor() {
   const canvasRef = useRef(null);
-  let app: Scene;
+  let app: Scene | null = null;
   const [hoverInfo, setHoverInfo] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
-    if (canvasRef) {
+    if (canvasRef.current) {
+      // eslint-disable-next-line react-hooks/exhaustive-deps
       app = new Scene(canvasRef.current);
       app.run();
       app.hoverInfCallback = getFromCanvas;
@@ -23,14 +24,14 @@ export default function Editor() {
   }
 
   const doSomething = useCallback(() => {
-    app.doSomething();
-  }, [])
+    app!.doSomething();
+  }, [app])
 
   const handleMouseMovement = useCallback((e: MouseEvent) => {
     e.preventDefault();
 
-    app.mouseMoveCallback(e);
-  }, [])
+    app!.mouseMoveCallback(e);
+  }, [app])
 
   return (
     <div className="h-full">

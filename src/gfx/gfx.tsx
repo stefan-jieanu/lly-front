@@ -7,9 +7,9 @@ class Scene {
   material: THREE.MeshBasicMaterial;
   geometry: THREE.BoxGeometry;
   cube: THREE.Mesh;
-  hoverInfCallback: Function = () => { console.error('Not implemented'); };
+  hoverInfCallback: (x: number, y: number) => void = () => { console.error('Not implemented'); };
 
-  constructor(canvasRef: any) {
+  constructor(canvasRef: HTMLCanvasElement) {
     this.scene = new THREE.Scene();
     this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
     this.renderer = new THREE.WebGLRenderer({ canvas: canvasRef });
@@ -22,6 +22,7 @@ class Scene {
     this.scene.add(this.cube);
 
     this.camera.position.z = 5;
+    console.log('Initialized scene!');
   }
 
 
