@@ -35,11 +35,11 @@ export default function Editor() {
 
   return (
     <div className="h-full">
-      <div className='flex gap-10 h-full items-center justify-center'>
-        <div>
+      <div className='flex gap-6 h-full px-5 items-center justify-center'>
+        <div className='flex-auto'>
           <Controls doSomething={doSomething} hoverInfo={hoverInfo} />
         </div>
-        <div className=''>
+        <div className='flex-auto'>
           <Canvas canvasRef={canvasRef} onMouseMove={handleMouseMovement} />
         </div>
       </div>
