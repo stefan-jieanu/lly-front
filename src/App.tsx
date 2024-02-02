@@ -1,5 +1,4 @@
-import { useState } from 'react'
-import Editor from './components/Editor/Editor'
+import Editor from './components/Game/Editor'
 
 function App() {
 
