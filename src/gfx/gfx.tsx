@@ -14,6 +14,7 @@ class Scene {
   constructor(canvasRef: HTMLCanvasElement) {
     this.scene = new THREE.Scene();
     this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    this.camera.translateX(-1);
     this.renderer = new THREE.WebGLRenderer({ canvas: canvasRef, alpha: true });
     this.renderer.setSize(window.innerWidth, window.innerHeight);
     console.log(canvasRef.width, canvasRef.height);
@@ -51,7 +52,8 @@ class Scene {
   }
 
   doSomething() {
-    this.material = new THREE.MeshStandardMaterial({ color: 0x0000ff });
+    let randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
+    this.material = new THREE.MeshStandardMaterial({ color: randomColor });
     this.cube.material = this.material;
   }
 

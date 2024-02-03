@@ -35,7 +35,7 @@ export default function Editor() {
 
   return (
     <div className='flex gap-6 h-full px-5 items-center justify-center'>
-      <div className='flex-auto z-10'>
+      <div className='flex-auto z-10 w-72'>
         <Controls doSomething={doSomething} hoverInfo={hoverInfo} />
       </div>
       <Canvas canvasRef={canvasRef} onMouseMove={handleMouseMovement} />
