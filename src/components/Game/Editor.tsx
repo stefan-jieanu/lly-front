@@ -24,7 +24,7 @@ export default function Editor() {
   }
 
   const doSomething = useCallback(() => {
-    app!.doSomething();
+    // app!.doSomething();
   }, [app])
 
   const handleMouseMovement = useCallback((e: MouseEvent) => {
