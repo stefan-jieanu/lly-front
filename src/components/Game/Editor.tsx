@@ -27,18 +27,12 @@ export default function Editor() {
     // app!.doSomething();
   }, [app])
 
-  const handleMouseMovement = useCallback((e: MouseEvent) => {
-    e.preventDefault();
-
-    app!.mouseMoveCallback(e);
-  }, [app])
-
   return (
-    <div className='flex gap-6 h-full px-5 items-center justify-center'>
-      <div className='flex-auto z-10 w-72'>
+    <div className='flex justify-start gap-6 h-full px-5 items-center'>
+      <div className='z-10'>
         <Controls doSomething={doSomething} hoverInfo={hoverInfo} />
       </div>
-      <Canvas canvasRef={canvasRef} onMouseMove={handleMouseMovement} />
+      <Canvas canvasRef={canvasRef} />
     </div>
   )
 }
